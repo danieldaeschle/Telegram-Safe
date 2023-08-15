@@ -22,6 +22,7 @@ dependencies {
 
     implementation "com.microsoft.appcenter:appcenter-distribute:3.3.1"
     implementation "com.microsoft.appcenter:appcenter-crashes:3.3.1"
+    implementation "com.microsoft.appcenter:appcenter-analytics:3.3.1"
 }
 
 android {
@@ -143,7 +144,7 @@ android {
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionName APP_VERSION_NAME
         ndkVersion "21.4.7075529"
 
