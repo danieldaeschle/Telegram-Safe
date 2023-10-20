@@ -3692,6 +3692,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     TLRPC.TL_messageMediaStory mediaStory = new MessageMediaStoryFull();
                     mediaStory.id = sendingStory.id;
                     mediaStory.user_id = sendingStory.dialogId;
+                    mediaStory.peer = getMessagesController().getPeer(sendingStory.dialogId);
                     mediaStory.storyItem = sendingStory;
                     newMsg.media = mediaStory;
                     type = MEDIA_TYPE_STORY;
@@ -4278,7 +4279,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     } else if (type == MEDIA_TYPE_STORY) {
                         TLRPC.TL_inputMediaStory inputMediaStory = new TLRPC.TL_inputMediaStory();
                         inputMediaStory.id = sendingStory.id;
-                        inputMediaStory.user_id = MessagesController.getInstance(currentAccount).getInputUser(sendingStory.dialogId);
+                        inputMediaStory.peer = MessagesController.getInstance(currentAccount).getInputPeer(sendingStory.dialogId);
                         inputMedia = inputMediaStory;
                     }
 
@@ -4736,11 +4737,15 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     reqSend.reply_to = SendMessagesHelper.creteReplyInput(replyToTopMsg.getId());
                     reqSend.flags |= 512;
                 }
+
                 if (newMsg.from_id != null) {
                     reqSend.send_as = getMessagesController().getInputPeer(newMsg.from_id);
                 }
                 reqSend.hide_via = !params.containsKey("bot");
-                if (newMsg.reply_to != null && newMsg.reply_to.reply_to_msg_id != 0) {
+                if (replyToStoryItem != null) {
+                    reqSend.reply_to = creteReplyInput(replyToStoryItem);
+                    reqSend.flags |= 1;
+                } else if (newMsg.reply_to != null && newMsg.reply_to.reply_to_msg_id != 0) {
                     reqSend.flags |= 1;
                     reqSend.reply_to = SendMessagesHelper.creteReplyInput(newMsg.reply_to.reply_to_msg_id);
                 }
@@ -7804,7 +7809,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                                 accountInstance.getUserConfig().saveConfig(false);
                                 TLRPC.TL_documentAttributeVideo attributeVideo;
                                 if (isEncrypted) {
-                                    attributeVideo = new TLRPC.TL_documentAttributeVideo();
+                                    attributeVideo = new TLRPC.TL_documentAttributeVideo_layer159();
                                 } else {
                                     attributeVideo = new TLRPC.TL_documentAttributeVideo();
                                     attributeVideo.supports_streaming = true;
@@ -8477,7 +8482,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                         if (encryptedChat == null) {
                             return;
                         }
-                        attributeVideo = new TLRPC.TL_documentAttributeVideo();
+                        attributeVideo = new TLRPC.TL_documentAttributeVideo_layer159();
                     } else {
                         attributeVideo = new TLRPC.TL_documentAttributeVideo();
                         attributeVideo.supports_streaming = true;
