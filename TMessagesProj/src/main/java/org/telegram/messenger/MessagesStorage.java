@@ -1946,7 +1946,7 @@ public class MessagesStorage extends BaseController {
             getNotificationCenter().postNotificationName(NotificationCenter.didClearDatabase);
             getMediaDataController().loadAttachMenuBots(false, true);
             getNotificationCenter().postNotificationName(NotificationCenter.onDatabaseReset);
-            
+
             getMessagesController().getStoriesController().cleanup();
         });
     }

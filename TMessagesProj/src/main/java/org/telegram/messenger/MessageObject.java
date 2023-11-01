@@ -1368,7 +1368,7 @@ public class MessageObject {
                 backgroundChangeBounds = false;
             }
         }
-        
+
         public boolean contains(int messageId) {
             if (messages == null) {
                 return false;
@@ -9127,7 +9127,7 @@ public class MessageObject {
     public static CharSequence peerNameWithIcon(int currentAccount, TLRPC.Peer peer) {
         return peerNameWithIcon(currentAccount, peer, !(peer instanceof TLRPC.TL_peerUser));
     }
-    
+
     public static CharSequence peerNameWithIcon(int currentAccount, TLRPC.Peer peer, boolean anotherChat) {
         if (peer instanceof TLRPC.TL_peerUser) {
             TLRPC.User user = MessagesController.getInstance(currentAccount).getUser(peer.user_id);

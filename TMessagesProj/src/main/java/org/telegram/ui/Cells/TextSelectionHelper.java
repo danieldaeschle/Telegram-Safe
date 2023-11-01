@@ -2271,15 +2271,11 @@ public abstract class TextSelectionHelper<Cell extends TextSelectionHelper.Selec
                             offsetX = dp(10);
                         }
                         layoutBlock.xOffset = -(block.isRtl() ? (int) Math.ceil(captionLayout.textXOffset) - offsetX : 0);
-                        if (block.code && !block.quote) {
                             layoutBlock.xOffset += dp(8);
                         }
                         layoutBlock.charOffset = block.charactersOffset;
                         return;
                     }
-                }
-                layoutBlock.layout = null;
-                return;
             }
 
             if (messageObject.textLayoutBlocks == null) {

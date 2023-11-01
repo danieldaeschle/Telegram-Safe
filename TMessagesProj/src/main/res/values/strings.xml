@@ -5886,6 +5886,8 @@
     <string name="GiftTelegramPremiumTitle">Gift Telegram Premium</string>
     <string name="GiftTelegramPremiumDescription">Let **%1$s** enjoy exclusive features of Telegram with **Telegram Premium**.</string>
     <string name="TelegramPremium">Telegram Premium</string>
+    <string name="SubscriptionsCount">%1$s subscriptions</string>
+    <string name="TelegramPremiumCount">%1$d Telegram Premium</string>
     <string name="TelegramPremiumSubtitle">Go **beyond the limits**, get exclusive features and support us by subscribing to **Telegram Premium**.</string>
     <string name="TelegramPremiumSubscribedTitle">You are all set!</string>
     <string name="TelegramPremiumSubscribedSubtitle">Thank you for subscribing to **Telegram Premium**.\nHere’s what is now unlocked.</string>
@@ -7170,7 +7172,7 @@
     <string name="AllViewers">All viewers</string>
     <string name="SortByReactions">Reactions First</string>
     <string name="SortByTime">Newest First</string>
-    <string name="StoryViewsSortDescription">Choose the order for the 
+    <string name="StoryViewsSortDescription">Choose the order for the
 list of viewers.</string>
     <string name="NoContactsViewed">None of your contacts viewed this story.</string>
     <string name="Viewers">Viewers</string>

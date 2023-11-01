@@ -828,7 +828,6 @@ public class PeerColorActivity extends BaseFragment implements NotificationCente
             super(context);
             this.currentAccount = currentAccount;
             this.resourcesProvider = resourcesProvider;
-            
             setPadding(dp(8), dp(8), dp(8), dp(8));
             setClipToPadding(false);
 
