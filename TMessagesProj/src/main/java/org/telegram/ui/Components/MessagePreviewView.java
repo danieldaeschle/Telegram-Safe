@@ -232,11 +232,14 @@ public class MessagePreviewView extends FrameLayout {
                     if (group != null) {
                         if (group.isDocuments) {
                             if (fallback != null) {
+                                return fallback;
                             } else if (messagePreviewParams.quote != null) {
                                 return messagePreviewParams.quote.message;
                             }
                         }
                         return group.captionMessage;
+                    }
+                }
                 return messagePreviewParams.replyMessage.messages.get(0);
             }
             return null;

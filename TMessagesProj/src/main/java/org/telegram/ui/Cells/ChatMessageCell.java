@@ -34,13 +34,11 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.graphics.Xfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -5415,9 +5413,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
                     maxChildWidth = Math.max(maxChildWidth, totalCommentWidth);
                 }
                 int maxWebWidth = 0;
-
-                giveawayMessageCell.setMessageContent(messageObject, getParentWidth(), forwardedNameWidth);
-
+                
                 if (hasLinkPreview || hasGamePreview || hasInvoicePreview) {
                     int linkPreviewMaxWidth;
                     if (AndroidUtilities.isTablet()) {
