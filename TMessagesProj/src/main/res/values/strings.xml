@@ -7234,6 +7234,7 @@
     <string name="AllViewers">All viewers</string>
     <string name="SortByReactions">Reactions First</string>
     <string name="SortByTime">Newest First</string>
+    <string name="StoryViewsSortDescription">Choose the order for the  list of viewers.</string>
     <string name="NoContactsViewed">None of your contacts viewed this story.</string>
     <string name="Viewers">Viewers</string>
     <string name="StealthModeConfirmTitle">You are in Stealth Mode now</string>
