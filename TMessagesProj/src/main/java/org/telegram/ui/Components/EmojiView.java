@@ -5774,7 +5774,7 @@ public class EmojiView extends FrameLayout implements NotificationCenter.Notific
                     }
                 }
             }
-            if (MessagesController.getInstance(currentAccount).premiumLocked) {
+            if (MessagesController.getInstance(currentAccount).premiumFeaturesBlocked()) {
                 for (int a = 0; a < favouriteStickers.size(); a++) {
                     if (MessageObject.isPremiumSticker(favouriteStickers.get(a))) {
                         favouriteStickers.remove(a);
@@ -8985,9 +8985,9 @@ public class EmojiView extends FrameLayout implements NotificationCenter.Notific
 
         private final int currentAccount;
         private final long dialogId;
-        private final int threadId;
+        private final long threadId;
 
-        public ChooseStickerActionTracker(int currentAccount, long dialogId, int threadId) {
+        public ChooseStickerActionTracker(int currentAccount, long dialogId, long threadId) {
             this.currentAccount = currentAccount;
             this.dialogId = dialogId;
             this.threadId = threadId;

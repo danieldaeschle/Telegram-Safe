@@ -12,6 +12,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.CornerPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -53,6 +55,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
+import com.google.android.exoplayer2.util.Log;
+
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.Emoji;
 import org.telegram.messenger.FileLog;
@@ -83,6 +87,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
 
     private View customView;
     private View bottomView;
+    private View aboveMessageView;
     private int customViewHeight = LayoutHelper.WRAP_CONTENT;
     private TextView titleTextView;
     private TextView secondTitleTextView;
@@ -197,7 +202,7 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
     }
 
     protected boolean supportsNativeBlur() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && LaunchActivity.systemBlurEnabled;
+        return false; // Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && LaunchActivity.systemBlurEnabled;
     }
 
     public void redPositive() {
@@ -766,9 +771,12 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
             progressView.setProgressColor(getThemedColor(Theme.key_dialog_inlineProgress));
             progressViewContainer.addView(progressView, LayoutHelper.createFrame(86, 86, Gravity.CENTER));
         } else {
+            if (aboveMessageView != null) {
+                scrollContainer.addView(aboveMessageView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 22, 4, 22, 12));
+            }
             scrollContainer.addView(messageTextView, LayoutHelper.createLinear(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, (topAnimationIsNew ? Gravity.CENTER_HORIZONTAL : LocaleController.isRTL ? Gravity.RIGHT : Gravity.LEFT) | Gravity.TOP, 24, 0, 24, customView != null || items != null ? customViewOffset : 0));
             if (bottomView != null) {
-                scrollContainer.addView(bottomView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 24, -24, 24, 0));
+                scrollContainer.addView(bottomView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, 22, 12, 22, 0));
             }
         }
         if (!TextUtils.isEmpty(message)) {
@@ -1170,6 +1178,21 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
         }
     }
 
+    public void setTextSize(int titleSizeDp, int messageSizeDp) {
+        if (titleTextView != null) {
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, titleSizeDp);
+        }
+        if (messageTextView != null) {
+            messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, messageSizeDp);
+        }
+    }
+
+    public void setMessageLineSpacing(float spaceDp) {
+        if (messageTextView != null) {
+            messageTextView.setLineSpacing(AndroidUtilities.dp(spaceDp), 1.0f);
+        }
+    }
+
     private void showCancelAlert() {
         if (!canCacnel || cancelDialog != null) {
             return;
@@ -1520,6 +1543,11 @@ public class AlertDialog extends Dialog implements Drawable.Callback, Notificati
         public Builder setView(View view, int height) {
             alertDialog.customView = view;
             alertDialog.customViewHeight = height;
+            return this;
+        }
+
+        public Builder aboveMessageView(View view) {
+            alertDialog.aboveMessageView = view;
             return this;
         }
 
